@@ -1,0 +1,26 @@
+.wrapper {
+}
+
+.wrapper h1 {
+  margin-bottom: 2rem;
+}
+
+.label {
+  background: var(--lightGrey);
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-transform: capitalize;
+  font-weight: var(--fw-semibold);
+}
+
+.label.approved {
+  background: var(--successColor);
+  color: var(--white);
+}
+.label.waiting {
+  background: var(--secondaryColor);
+}
+.label.rejected {
+  background: var(--dangerColor);
+  color: var(--white);
+}

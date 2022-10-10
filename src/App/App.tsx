@@ -1,6 +1,5 @@
-import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Applications from "pages/Applications";
+import Applications from "pages/ViewApplications";
 import ErrorHandler from "./ErrorHandler";
 
 const App = () => {
