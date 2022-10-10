@@ -11,9 +11,12 @@
   --copyDarkColor: var(--black);
   --copyLightColor: var(--white);
   --primaryColor: #d5f0f7;
-  --primaryLightColor: #faf5ff;
+  --primaryLightColor: #f4f7f9;
   --primaryMediumColor: #e7e2f8;
+  --primaryDarkColor: #5fb7ce;
   --secondaryColor: #ffff00;
+  --successColor: #16b636;
+  --dangerColor: #d95555;
 
   /* TYPOGRAPHY */
   --font-family: "Open Sans", sans-serif;
@@ -100,7 +103,7 @@ p {
 }
 
 a {
-  color: var(--primaryColor);
+  color: var(--primaryDarkColor);
   cursor: pointer;
   font-weight: var(--fw-semibold);
 }
