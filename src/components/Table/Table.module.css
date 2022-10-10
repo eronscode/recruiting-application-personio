@@ -1,0 +1,49 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tableWrapper table {
+  border-collapse: collapse;
+  width: 100%;
+  border-bottom: 2px solid var(--primaryColor);
+}
+
+.tableWrapper table thead {
+  border-bottom: 2px solid var(--primaryColor);
+  color: var(--darkGrey);
+  background: var(--primaryLightColor);
+}
+
+.tableWrapper table tr:not(:last-of-type) {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.tableWrapper table td {
+  padding: 1rem 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tableWrapper table th {
+  padding: 1rem;
+  text-align: left;
+}
+
+.tableWrapper table th button {
+  background: none;
+  border: none;
+  margin: 0 0 0 0.4rem;
+  cursor: pointer;
+  color: var(--lightGrey200);
+}
+
+.tableWrapper table th button .active {
+  color: var(--accentColor);
+}
+
+.paginationWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
