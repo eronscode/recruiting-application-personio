@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.wrapper button{
+    border: none;
+    outline: 0;
+    background: var(--primaryDarkColor);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
