@@ -21,7 +21,7 @@ An assignment to create a new and optimized version of a recruiting application.
 3. Once installation is complete, type `yarn start` to start the project in your local browser. This will start up the full react application.
 
 NOTE:
-
+- If on entry of any files in the codebase and you get this error on imported modules e.g `Cannot find module 'classnames' or its corresponding type declarations.`, close your code editor and open again
 - Ensure you're connected to the internet so data can load up.
 
 You can start editing the page by modifying `pages/ViewApplications/index.js`.
