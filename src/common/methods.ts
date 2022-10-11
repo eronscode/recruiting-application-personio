@@ -79,3 +79,20 @@ export function sortRows<T>(
     }
   });
 }
+
+export function createFilterOptions<T>(array: T[], key: string) {
+  let values: any[] = [];
+  [...array].forEach((element) => {
+    const checkValues = values.filter(
+      (item) => item.value === element[key as keyof typeof element],
+    );
+    if (checkValues.length === 0) {
+      values.push({
+        value: element[key as keyof typeof element],
+        label: element[key as keyof typeof element],
+      });
+    }
+  });
+
+  return values;
+}
