@@ -21,7 +21,7 @@ function Filter({
   resetFilters,
   updateFilters,
 }: Props) {
-  return (
+  return Array.isArray(filterControls) && filterControls?.length > 0 ? (
     <section className={styles.filterWrapper}>
       <h1>Filters: </h1>
       {filterControls?.map((filter, index) => {
@@ -42,7 +42,7 @@ function Filter({
         </button>
       )}
     </section>
-  );
+  ) : null;
 }
 
 function renderFilterType(
