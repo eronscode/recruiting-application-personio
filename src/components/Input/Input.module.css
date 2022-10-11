@@ -1,0 +1,19 @@
+.wrapper input {
+  background: var(--copyLightColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 0.2rem;
+  width: 100%;
+  outline: none;
+  padding: 0.5rem 1.2rem;
+  color: var(--copyDarkColor);
+  font-family: var(--font-family);
+}
+
+.wrapper input:focus {
+  border: 1px solid var(--primaryDarkColor);
+}
+
+.wrapper input::placeholder {
+  color: var(--accentColor);
+  font-weight: 500;
+}
