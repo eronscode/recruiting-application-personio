@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { sortRows } from "common/methods";
 
 export function useSorting<T>(
-  dataToPaginate: Array<T>,
+  dataToSort: Array<T>,
   { onSort }: { onSort?: () => void },
 ) {
   const [sort, setSort] = useState({ order: "asc", orderBy: "id" });
@@ -21,6 +21,7 @@ export function useSorting<T>(
       orderBy: accessor,
     }));
     setSearchParams({
+      ...Object.fromEntries(Array.from(searchParams)),
       order: sort.order === "asc" && sort.orderBy === accessor ? "desc" : "asc",
       orderBy: accessor,
     });
@@ -36,10 +37,7 @@ export function useSorting<T>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const data = useMemo(
-    () => sortRows(dataToPaginate, sort),
-    [dataToPaginate, sort],
-  );
+  const data = useMemo(() => sortRows(dataToSort, sort), [dataToSort, sort]);
 
   return {
     data,
