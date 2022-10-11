@@ -1,7 +1,4 @@
-.wrapper {
-}
-
-.wrapper h1 {
+.wrapper > h1 {
   margin-bottom: 2rem;
 }
 
