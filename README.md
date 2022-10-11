@@ -23,6 +23,7 @@ An assignment to create a new and optimized version of a recruiting application.
 NOTE:
 - If on entry of any files in the codebase and you get this error on imported modules e.g `Cannot find module 'classnames' or its corresponding type declarations.`, close your code editor and open again
 - Ensure you're connected to the internet so data can load up.
+- React.strict mode was temporarily removed in the project because in react 18, react.strict mode causes useEffect to run twice on development. This is doesn't happen in production so strict mode can be added before pushing to production. One hack will be to create a hook that runs useEffect once. Read more here: https://github.com/facebook/react/issues/24553 
 
 You can start editing the page by modifying `pages/ViewApplications/index.js`.
 
