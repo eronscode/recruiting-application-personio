@@ -11,7 +11,7 @@ type Props = {
     [key: string]: SelectOptionT[] | string;
   } | null;
   resetFilters: (value?: any) => void;
-  updateFilters: (value: any, accessor: string) => void;
+  updateFilters: (value: SelectOptionT[] | string, accessor: string) => void;
 };
 
 function Filter({
