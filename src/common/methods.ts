@@ -96,3 +96,11 @@ export function createFilterOptions<T>(array: T[], key: string) {
 
   return values;
 }
+
+export function generateOptionsFromStringArr(array: string[]) {
+  if (!array || !Array.isArray(array) || array.length === 0) return "";
+  return array.map((item) => ({
+    value: item,
+    label: item,
+  }));
+}
