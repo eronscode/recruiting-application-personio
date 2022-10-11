@@ -5,6 +5,9 @@ import { useSorting } from "hooks/useSorting";
 import styles from "./Table.module.css";
 import { ArrowDownIcon, ArrowUpIcon } from "components/SvgIcons";
 import classNames from "classnames";
+import { FilterT } from "common/types";
+import Filter from "components/Filter";
+import { useFilters } from "hooks/useFilters";
 
 type Props<T> = {
   columns: {
@@ -16,6 +19,7 @@ type Props<T> = {
   rows: Array<T>;
   paginate?: boolean;
   isLoading?: boolean;
+  filterControls?: FilterT[];
 };
 
 const Table = <T extends { id?: string }>({
@@ -23,12 +27,26 @@ const Table = <T extends { id?: string }>({
   rows,
   paginate,
   isLoading,
+  filterControls,
 }: Props<T>) => {
+  const {
+    filters,
+    updateFilters,
+    selectedFilters,
+    options,
+    data: filteredData,
+    resetFilters,
+  } = useFilters(filterControls ?? [], rows, {
+    onFilter: () => {
+      setPage(1);
+    },
+  });
+
   const {
     data: sortedData,
     handleSort,
     sort,
-  } = useSorting(rows, {
+  } = useSorting(filteredData, {
     onSort: () => {
       setPage(1);
     },
@@ -50,20 +68,19 @@ const Table = <T extends { id?: string }>({
   return (
     <>
       <section className={styles.tableWrapper}>
+        {filters && (
+          <Filter
+            filterControls={filters}
+            selectedFilters={selectedFilters}
+            updateFilters={updateFilters}
+            options={options}
+            resetFilters={resetFilters}
+          />
+        )}
         <table>
           <thead>
             <tr>
               {columns?.map((column) => {
-                // const sortIcon = () => {
-                //   if (column.accessor === sort.orderBy) {
-                //     if (sort.order === "asc") {
-                //       return <ArrowUpIcon />;
-                //     }
-                //     return <ArrowDownIcon />;
-                //   } else {
-                //     return "️↕️";
-                //   }
-                // };
                 return (
                   <th key={column.accessor}>
                     {column.label}
