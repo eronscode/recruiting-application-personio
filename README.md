@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+## Personio Frontend Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An assignment to create a new and optimized version of a recruiting application.
 
-## Available Scripts
+## Libraries
 
-In the project directory, you can run:
+- React
+- TypeScript
 
-### `yarn start`
+## Packages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- react-router-dom
+- react-select
+- classnames
+- react-content-loader
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Run this project locally
 
-### `yarn test`
+1. Download and Install Node JS from https://nodejs.org/en/download/
+2. In the root project directory, type `yarn install` to install the project's dependencies.
+3. Once installation is complete, type `yarn start` to start the project in your local browser. This will start up the full react application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+NOTE:
 
-### `yarn build`
+- Ensure you're connected to the internet so data can load up.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can start editing the page by modifying `pages/ViewApplications/index.js`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Implemented fetching of data from the given endpoint with a re-usable hook `useFetch`. Errors and Loading states were also handled by this re-usable hook.
+2. Displayed data from the API on the Table component.
+3. Implemented sorting by ascending or descending of data.
+3. Created Muiltiselect component used to select multiple filter criteria for filtering data on the table.
+4. Made the URL changed every time sorting or filtering is applied.
 
-### `yarn eject`
+## Codebase Improvements/Next Steps
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Authentication**: Adding authenticaiton to the application to allow only authorized users to view sensitive data
+- **Responsive**: Although the application is a little bit responsive, one improvement will be to make it very responsive.
+- **Precommit Hooks**: Using precommit hooks like husky for linting, tests etc
+- **Deployment:** Implement CI/CD pipeline and continously deploy to a hosting server. CI/CD pipelines is important because it helps to minimize human error and maintain a consistent process for how software is released.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contact Info
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Feel free to reach me on:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+LinkedIn: https://www.linkedin.com/in/ose-matthew/
 
-## Learn More
+Email: osemu.matthew@gmail.com
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Gracias
