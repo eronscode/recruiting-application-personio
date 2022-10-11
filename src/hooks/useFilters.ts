@@ -63,7 +63,12 @@ export function useFilters<T>(
       ...allQueryParamsFromURL,
     };
     Object.keys(updatedURLFilters).forEach((key) => {
-      delete updatedURLFilters[key];
+      const checkFilter = filters.some((filter) =>
+        filter.accessor.includes(key),
+      );
+      if (checkFilter) {
+        delete updatedURLFilters[key];
+      }
     });
 
     setSelectedFilters(null);
@@ -109,7 +114,9 @@ export function useFilters<T>(
         if (Array.isArray(find)) {
           return find.some((item) => item.value.toString().includes(objProp));
         }
-        return objProp.toLowerCase().indexOf(find.toLowerCase()) !== -1;
+        return (
+          objProp.toString().toLowerCase().indexOf(find.toLowerCase()) !== -1
+        );
       }),
     );
   }, [selectedFilters, dataToFilter]);
