@@ -1,10 +1,11 @@
+import classNames from "classnames";
 import MainLayout from "layouts/MainLayout";
 import { API_URL } from "common/constants";
 import Table from "components/Table";
 import { useFetch } from "hooks/useFetch";
-import { UserT } from "common/types";
+import {  UserT } from "common/types";
 import styles from "./ViewApplications.module.css";
-import classNames from "classnames";
+import { FilterE } from "common/enums";
 
 const columns = [
   { accessor: "name", label: "Name" },
@@ -40,12 +41,31 @@ function Applications() {
         {error ? (
           <p>Error Occured</p>
         ) : (
-          <Table
-            rows={data || []}
-            columns={columns}
-            paginate
-            isLoading={isLoading}
-          />
+          <>
+            <Table
+              rows={data || []}
+              columns={columns}
+              paginate
+              isLoading={isLoading}
+              filterControls={[
+                {
+                  accessor: "position_applied",
+                  label: "Postion",
+                  type: FilterE.MultiSelect,
+                },
+                {
+                  accessor: "status",
+                  label: "Status",
+                  type: FilterE.MultiSelect,
+                },
+                {
+                  accessor: "name",
+                  label: "Search by Name",
+                  type: FilterE.Search,
+                },
+              ]}
+            />
+          </>
         )}
       </section>
     </MainLayout>
