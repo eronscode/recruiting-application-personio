@@ -24,11 +24,6 @@ const Option = (props: any) => {
 };
 
 const customStyles = {
-  //   option: (provided: any, state: any) => ({
-  //     ...provided,
-  //     borderBottom: "1px dotted pink",
-  //     padding: 20,
-  //   }),
   control: (provided: any, state: any) => ({
     ...provided,
     border: state.selectProps.isActive
@@ -85,6 +80,7 @@ function CustomMultiSelect({ values, onChange, placeholder, options }: Props) {
       placeholder={placeholderText}
       isSearchable={false}
       styles={customStyles}
+      aria-label={placeholder}
       // BUG: https://github.com/JedWatson/react-select/issues/5274
       // @ts-ignore
       isActive={values && values?.length > 0}
