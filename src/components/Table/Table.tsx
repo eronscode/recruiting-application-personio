@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
+import classNames from "classnames";
 import Pagination from "components/Pagination";
 import { usePagination } from "hooks/usePagination";
 import { useSorting } from "hooks/useSorting";
 import styles from "./Table.module.css";
 import { ArrowDownIcon, ArrowUpIcon } from "components/SvgIcons";
-import classNames from "classnames";
 import { FilterT } from "common/types";
 import Filter from "components/Filter";
 import { useFilters } from "hooks/useFilters";
+import TableLoaders from "components/Loaders/TableLoader";
 
 type Props<T> = {
   columns: {
@@ -63,7 +64,7 @@ const Table = <T extends { id?: string }>({
 
   const data = paginate ? paginateData : sortedData;
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <TableLoaders />;
 
   return (
     <>
