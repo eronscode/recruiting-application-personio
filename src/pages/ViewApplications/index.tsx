@@ -3,9 +3,10 @@ import MainLayout from "layouts/MainLayout";
 import { API_URL } from "common/constants";
 import Table from "components/Table";
 import { useFetch } from "hooks/useFetch";
-import {  UserT } from "common/types";
+import { UserT } from "common/types";
 import styles from "./ViewApplications.module.css";
 import { FilterE } from "common/enums";
+import ErrorUI from "components/ErrorUI";
 
 const columns = [
   { accessor: "name", label: "Name" },
@@ -32,14 +33,14 @@ const columns = [
 ];
 
 function Applications() {
-  const { data, isLoading, error } = useFetch<UserT[]>(API_URL);
+  const { data, isLoading, error, fetchData } = useFetch<UserT[]>(API_URL);
 
   return (
     <MainLayout>
       <section className={styles.wrapper}>
         <h1>Applications</h1>
         {error ? (
-          <p>Error Occured</p>
+          <ErrorUI message={error} reset={fetchData} />
         ) : (
           <>
             <Table
@@ -50,7 +51,7 @@ function Applications() {
               filterControls={[
                 {
                   accessor: "position_applied",
-                  label: "Postion",
+                  label: "Position",
                   type: FilterE.MultiSelect,
                 },
                 {
