@@ -107,3 +107,9 @@ a {
   cursor: pointer;
   font-weight: var(--fw-semibold);
 }
+
+button,
+input,
+table {
+  font-family: var(--font-family);
+}
