@@ -94,7 +94,7 @@ export function createFilterOptions<T>(array: T[], key: string) {
     }
   });
 
-  return values;
+  return [...values].sort((a, b) => (a.label < b.label ? -1 : 1));
 }
 
 export function generateOptionsFromStringArr(array: string[]) {
