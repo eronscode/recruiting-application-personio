@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { createFilterOptions } from "common/methods";
+import {
+  createFilterOptions,
+  generateOptionsFromStringArr,
+} from "common/methods";
 import { FilterT, SelectOptionT } from "common/types";
 import { FilterE } from "common/enums";
 
@@ -13,6 +16,7 @@ export function useFilters<T>(
     [key: string]: SelectOptionT[] | string;
   } | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const allQueryParamsFromURL = Object.fromEntries(Array.from(searchParams));
 
   const options = filters.map((filter) => {
     if (filter.type === FilterE.MultiSelect) {
@@ -21,7 +25,13 @@ export function useFilters<T>(
     return [];
   });
 
-  function updateFilters(selected: any, accessor: string) {
+  /*
+    # --------------------------------------------------------------- #
+    # updates SelectedFilters and searchParams with data gotten from  #
+    # filter types e.g MultiSelect:SelectOptionT[] or Input:string    #
+    # --------------------------------------------------------------- #
+  */
+  function updateFilters(selected: SelectOptionT[] | string, accessor: string) {
     onFilter && onFilter();
     if (selected && selected.length > 0) {
       setSelectedFilters((prevState: any) => ({
@@ -29,7 +39,7 @@ export function useFilters<T>(
         [accessor]: selected,
       }));
       setSearchParams({
-        ...Object.fromEntries(Array.from(searchParams)),
+        ...allQueryParamsFromURL,
         [accessor]: Array.isArray(selected)
           ? selected.map((select: any) => select.value).join(",")
           : selected,
@@ -41,7 +51,7 @@ export function useFilters<T>(
         return updatedFilters;
       });
       const updatedURLFilters = {
-        ...Object.fromEntries(Array.from(searchParams)),
+        ...allQueryParamsFromURL,
       };
       delete updatedURLFilters[accessor];
       setSearchParams(updatedURLFilters);
@@ -49,9 +59,49 @@ export function useFilters<T>(
   }
 
   function resetFilters() {
+    const updatedURLFilters = {
+      ...allQueryParamsFromURL,
+    };
+    Object.keys(updatedURLFilters).forEach((key) => {
+      delete updatedURLFilters[key];
+    });
+
     setSelectedFilters(null);
+    setSearchParams(updatedURLFilters);
   }
 
+  /*
+    # ------------------------------------------------------------ #
+    # Compares accessor keys in Filters prop with keys gotten from #
+    # url and sets selected filters on component mount             #
+    # ------------------------------------------------------------ #
+  */
+  useEffect(() => {
+    let keyFound: { [key: string]: string | SelectOptionT[] } = {};
+    Object.keys(allQueryParamsFromURL).forEach((key) => {
+      const keyExist = filters.some((filter) => filter.accessor.includes(key));
+      if (keyExist) {
+        const filterType = filters.find((item) => item.accessor === key);
+        keyFound[key] =
+          filterType?.type === FilterE.MultiSelect
+            ? generateOptionsFromStringArr(
+                allQueryParamsFromURL[key].split(","),
+              )
+            : allQueryParamsFromURL[key];
+      }
+    });
+    if (Object.keys(keyFound).length > 0) {
+      setSelectedFilters(keyFound);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /*
+    # ---------------------------------------- #
+    # Performs search based on selectedFilters #            
+    # ---------------------------------------- #
+  */
   const data = useMemo(() => {
     return dataToFilter.filter((obj) =>
       Object.entries(selectedFilters || {}).every(([prop, find]) => {
@@ -63,9 +113,6 @@ export function useFilters<T>(
       }),
     );
   }, [selectedFilters, dataToFilter]);
-
-
-  console.log({ data, selectedFilters });
 
   return {
     data,
