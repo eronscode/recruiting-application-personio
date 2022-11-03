@@ -115,7 +115,7 @@ export function useFilters<T>(
           return find.some((item) => item.value.toString().includes(objProp));
         }
         return (
-          objProp.toString().toLowerCase().indexOf(find.toLowerCase()) !== -1
+          objProp.toString().toLowerCase().indexOf(find.toLowerCase().trim()) !== -1
         );
       }),
     );
