@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { sortRows } from "common/methods";
 
@@ -6,10 +6,10 @@ export function useSorting<T>(
   dataToSort: Array<T>,
   { onSort }: { onSort?: () => void },
 ) {
-  const [sort, setSort] = useState({ order: "asc", orderBy: "id" });
   const [searchParams, setSearchParams] = useSearchParams();
   const orderFromURL = searchParams.get("order");
   const orderByFromURL = searchParams.get("orderBy");
+  const [sort, setSort] = useState({ order: orderFromURL || "asc", orderBy: orderByFromURL || "id" });
 
   const handleSort = (accessor: string) => {
     onSort && onSort();
@@ -26,16 +26,6 @@ export function useSorting<T>(
       orderBy: accessor,
     });
   };
-
-  useEffect(() => {
-    if (orderFromURL && orderByFromURL) {
-      setSort({
-        order: orderFromURL,
-        orderBy: orderByFromURL,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const data = useMemo(() => sortRows(dataToSort, sort), [dataToSort, sort]);
 
