@@ -18,7 +18,7 @@ export function useFetch<T>(url: string, variables?: any) {
         setData(response?.data);
       }
     } catch (error: any) {
-      setError(error);
+      setError(error?.message || "Error Occured");
     } finally {
       setIsLoading(false);
     }
