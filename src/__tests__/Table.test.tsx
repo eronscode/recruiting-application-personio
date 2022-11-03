@@ -20,7 +20,7 @@ const tableColumns = [
 const tableRows = [
   { id: "1", name: "John Smith", email: "test@test.com", status: "accepted" },
   { id: "2", name: "David BecK", email: "test2@test.com", status: "rejected" },
-  { id: "2", name: "Jane Nath", email: "test3@test.com", status: "waiting" },
+  { id: "3", name: "Jane Nath", email: "test3@test.com", status: "waiting" },
 ];
 
 const TableFilterControls = [
@@ -110,3 +110,25 @@ test("Table search filter is applied on data when searching", async () => {
   const searchQuery = await screen.findByText(/John Smith/i);
   expect(searchQuery).toBeInTheDocument();
 });
+
+// test("Table MultiSelect filter is applied on data", async () => {
+//   render(
+//     <MemoryRouter>
+//       <Table
+//         rows={tableRows}
+//         columns={tableColumns}
+//         filterControls={TableFilterControls}
+//         paginate
+//       />
+//     </MemoryRouter>,
+//   );
+//   const myCustomSelect = await screen.findByLabelText(/Status/i);
+//   userEvent.click(myCustomSelect)
+
+//   const selectedItem = screen.getAllByText(/accepted/i)
+//   userEvent.click(selectedItem[0]);
+
+//   screen.debug()
+
+//   // expect(screen.queryByText(/David BecK/i)).not.toBeInTheDocument();
+// });
